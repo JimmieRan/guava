@@ -1,5 +1,7 @@
 package com.ran.generic;
 
+
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -13,7 +15,7 @@ public class SimpleSQLGenerator {
 	
 	private int editFlag;       //1=insert,2=update,3=delete
 	
-	private String[] queryFields;  //查询字段组dd
+	private String[] queryFields;  //查询字段组: select String[0],String[1],String[2] from table
 	
 	private Map<String,Object> updateFields = null;  //UPDATE字段-字段值 ：SET name="zhangsan",sex="男"
 	
@@ -23,9 +25,9 @@ public class SimpleSQLGenerator {
 	
 	private boolean isOrder;   //是否排序
 	
-	private String orderField;  //排序字段名
+	private String orderField;  //排序字段名 order by orderField
 	
-	private String sql;        //生成SQL
+	private String sql;        //生成SQLxx
 	
 	public SimpleSQLGenerator(){}
 	
@@ -67,7 +69,6 @@ public class SimpleSQLGenerator {
 	//增删改SQL生成器,参数editFlag：0=insert,1=update,2=delete
 	public String editSQL( int editFlag ){
 		if( editFlag == 0 ){
-			String delSql = "DELETE FROM Person WHERE LastName = 'Wilson'";	
 			if( this.isNULLForMap(insertFields) ){
 				Set<String> insertFieldSet = insertFields.keySet();
 				int filedsSize = insertFieldSet.size();
@@ -84,23 +85,41 @@ public class SimpleSQLGenerator {
 					sql = sql.substring(0, sql.length()-1)+" )";
 				}
 			}
-			
-			
 		//构建UPDATE语句	
 		}else if( editFlag == 1 ){
-			sql = "UPDATE "+tableName+" SET Address = 'Zhongshan 23', City = 'Nanjing' WHERE LastName = 'Wilson'";
+			sql = "UPDATE "+tableName+" SET ";
 			Set<String> updateFieldSet = updateFields.keySet();
 			for( String field : updateFieldSet  ){
 				sql += field+"=? ,";
 			}
 			sql = sql.substring(0,sql.length()-1);
-			for( String field : updateFieldSet  ){
-				sql += field+"=? ,";
+			if( this.isNULLForMap(fields) ){
+				sql = sql +" where ";
+				Set<String> fieldSet = fields.keySet();
+				for(String field:fieldSet  ){
+					sql += " "+field+" =? and";
+				}
+				sql = sql.substring(0,sql.lastIndexOf("and"));
 			}
 			
 		//构建DELETE语句		
 		}else if( editFlag == 2 ){
-			
+			sql = "DELETE FROM "+tableName;
+			if( this.isNULLForMap(fields) ){
+				sql = sql +" where ";
+				Set<String> fieldSet = fields.keySet();
+				for(String field:fieldSet  ){
+					sql += " "+field+" =? and";
+				}
+				sql = sql.substring(0,sql.lastIndexOf("and"));
+			}
+		}
+		return sql;
+	}
+	
+	public String querySQL(){
+		if( this.isOrder ){
+			sql = "";
 		}
 		
 		return sql;
@@ -110,12 +129,20 @@ public class SimpleSQLGenerator {
 	public static void main(String[] args) {
 		Map<String,Object> fields = new HashMap<String,Object>();
 		fields.put("SEX", "女");
+		fields.put("ADDRESS", "成都市");
 		Map<String,Object> insertFields = new HashMap<String,Object>();
 		insertFields.put("YNAME", "张莉");
 		insertFields.put("PHONE", "13242221112");
 		insertFields.put("ADDRESS", "西昌市");
-		SimpleSQLGenerator sQLGenerator = new SimpleSQLGenerator("ADDRESSBOOK",new String[]{},null,insertFields,fields,false,"");
+		Map<String,Object> updateFields = new HashMap<String,Object>();
+		updateFields.put("YNAME", "张莉");
+		updateFields.put("PHONE", "13242221112");
+		updateFields.put("ADDRESS", "西昌市");
+		SimpleSQLGenerator sQLGenerator = new SimpleSQLGenerator("ADDRESSBOOK",new String[]{},updateFields,insertFields,fields,false,"");
 		System.out.println(sQLGenerator.countSQL());
 		System.out.println(sQLGenerator.editSQL(0));
+		System.out.println(sQLGenerator.editSQL(1));
+		System.out.println(sQLGenerator.editSQL(2));
 	}
 }
+
