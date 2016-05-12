@@ -13,7 +13,7 @@ public class SimpleSQLGenerator {
 	
 	private int editFlag;       //1=insert,2=update,3=delete
 	
-	private String[] queryFields;  //²éÑ¯×Ö¶Î×é
+	private String[] queryFields;  //²éÑ¯×Ö¶Î×édd
 	
 	private Map<String,Object> updateFields = null;  //UPDATE×Ö¶Î-×Ö¶ÎÖµ £ºSET name="zhangsan",sex="ÄÐ"
 	
