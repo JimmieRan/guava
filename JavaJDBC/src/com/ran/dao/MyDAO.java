@@ -36,6 +36,6 @@ public class MyDAO {
 		
 		long end = System.currentTimeMillis();
 		System.out.println("运行时间："+(end-star));
-		System.out.println("zzzzzzzzzzz");
+		System.out.println("ssssssssssss");
 	}
 }
