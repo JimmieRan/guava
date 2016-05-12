@@ -102,7 +102,7 @@ public class SimpleSQLGenerator {
 				sql = sql.substring(0,sql.lastIndexOf("and"));
 			}
 			
-		//构建DELETE语句		
+		//构建DELETE语句		s
 		}else if( editFlag == 2 ){
 			sql = "DELETE FROM "+tableName;
 			if( this.isNULLForMap(fields) ){
