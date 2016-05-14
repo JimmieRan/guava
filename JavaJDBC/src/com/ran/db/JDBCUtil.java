@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,7 +64,7 @@ public class JDBCUtil {
 	public void getConnection(){
 		try {
 			// conn = DriverManager.getConnection(DRIVER,DBUNAME,DBPWD);   //JDBC-ODBC连接
-			 conn = new DBManager().getConnection();  //C3P0
+			 conn = DBManager.getInstance().getConnection();  //C3P0
 		} catch (Exception e) {
 			System.out.println("数据库连接失败！");
 			e.printStackTrace();
@@ -78,7 +79,7 @@ public class JDBCUtil {
 	 * @param classPo —— 需要返回结果集合的类型
 	 * @return —— 返回一个LIST容器装PO对象，前台可直接遍历操作对象
 	 */
-	public List query( String sql , Object[] parms,Class classPo ){
+	public List query( String sql , List parms,Class classPo ){
 		entityList = new ArrayList();
 		//Map结构：key:表字段名   value：表字段值
 		//LIST结果：获取每一行数据，
@@ -86,9 +87,9 @@ public class JDBCUtil {
 		List<Map<String,Object>> resultList = new  ArrayList<Map<String,Object>>();
 		try {
 			ps = conn.prepareStatement(sql);    //预编译SQL
-			if( 0!=parms.length ){
-				for( int i = 0; i<parms.length; i++ ){
-					ps.setObject(i+1, parms[i]);   //循环设置参数
+			if( 0!=parms.size() ){
+				for( int i = 0; i<parms.size(); i++ ){
+					ps.setObject(i+1, parms.get(i));   //循环设置参数
 				}
 			}
 			rs = ps.executeQuery();   //执行查询操作
@@ -123,13 +124,13 @@ public class JDBCUtil {
 	 * @param parms
 	 * @return
 	 */
-	public int countQuery( String sql,Object[] parms){
+	public int countQuery( String sql,List parms){
 		int count = 0;
 		try {
 			ps = conn.prepareStatement(sql);  //预编译SQL
-			if( 0!=parms.length ){
-				for( int i = 0; i<parms.length; i++ ){
-					ps.setObject(i+1, parms[i]);   //循环设置参数
+			if( null!= parms && 0!= parms.size() ){
+				for( int i = 0; i<parms.size(); i++ ){
+					ps.setObject(i+1, parms.get(i));   //循环设置参数
 				}
 			}
 			rs = ps.executeQuery();   //执行查询操作
@@ -149,14 +150,14 @@ public class JDBCUtil {
 	 * @param pares  判断条件
 	 * @return
 	 */
-	public int edit( String sql, Object[] pares ){
+	public int edit( String sql, List pares ){
 		int hasEffect = 0;
 		try {
 			ps = conn.prepareStatement(sql);  //预编译SQL
 			
-			if( 0 != pares.length ){
-				for( int i = 0; i<pares.length; i++ ){
-					ps.setObject(i+1, pares[i]);   //循环设置参数
+			if( 0 != pares.size() ){
+				for( int i = 0; i<pares.size(); i++ ){
+					ps.setObject(i+1, pares.get(i));   //循环设置参数
 				}
 			}
 			hasEffect = ps.executeUpdate();  //执行增删改返回影响行数

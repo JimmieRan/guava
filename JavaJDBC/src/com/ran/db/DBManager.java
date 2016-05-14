@@ -14,7 +14,11 @@ public class DBManager {
 	static ComboPooledDataSource cpds = new ComboPooledDataSource("oracle");
 	private Connection conn = null;
 	
-	public DBManager(){}
+	private DBManager(){}
+	
+	public static DBManager getInstance(){
+		return dbm;
+	}
 	
 	/**
 	 * 获取连接
