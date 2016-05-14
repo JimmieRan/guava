@@ -27,7 +27,7 @@ public class SimpleSQLGenerator {
 	
 	private String orderField;  //排序字段名 order by orderField
 	
-	private String sql;        //生成SQLxx
+	private String sql;        //生成SQLxxssss
 	
 	public SimpleSQLGenerator(){}
 	
