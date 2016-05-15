@@ -35,8 +35,10 @@ public class MyDAO {
 		
 		/**********开始查询分页************/
 		PageDBManager pageDB = new PageDBManager( 10,1,sqlGen );
-		PageBean myPage = pageDB.pageBean;
+		PageBean myPage = pageDB.getPageBean();
 		ArrayList<AddressBookPO> recordList = (ArrayList<AddressBookPO>) pageDB.queryRecordList(sqlGen,AddressBookPO.class);
+		myPage.setResultList(recordList);
+		/*****分页结束，获得一个PageBean***/
 		
 		System.out.println("姓名——————性别——————电话——————地址");
 		for( AddressBookPO addressBook : recordList ){

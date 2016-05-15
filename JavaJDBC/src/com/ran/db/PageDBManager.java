@@ -9,9 +9,17 @@ import com.ran.generic.SimpleSQLGenerator;
 public class PageDBManager {
 	
 	private static final JDBCUtil jdbc = new JDBCUtil();    //数据库JDBC操作类
-	public PageBean pageBean = null;
-	public List fieldsValue = null;
+	private PageBean pageBean = null;
+	private List fieldsValue = null;
 	
+	public PageBean getPageBean() {
+		return pageBean;
+	}
+
+	public void setPageBean(PageBean pageBean) {
+		this.pageBean = pageBean;
+	}
+
 	public PageDBManager(){}
 	
 	public PageDBManager( int pageRecord,int currentPage,SimpleSQLGenerator sqlGen ){
@@ -23,9 +31,7 @@ public class PageDBManager {
 	
 	/**
 	 * 初始化总页数
-	 * @param tableName  表名
-	 * @param fields     条件字段
-	 * @param fieldsValue 字段值
+	 * @param sqlGen   SQL构造器
 	 */
 	public void searchAllRecord( SimpleSQLGenerator sqlGen ){
 		if( null != sqlGen.getFields() ){
@@ -34,7 +40,12 @@ public class PageDBManager {
 		pageBean.setAllRecord(jdbc.countQuery(sqlGen.countSQL(), fieldsValue));
 	}
 	
-	
+	/**
+	 * 条件分页查询
+	 * @param sqlGen    SQL构造器
+	 * @param classPo   结果集类型
+	 * @return
+	 */
 	public List queryRecordList( SimpleSQLGenerator sqlGen,Class classPo ){
 		List recordList = new ArrayList();
 		if( null != sqlGen.getFields() ){

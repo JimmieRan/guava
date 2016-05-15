@@ -1,14 +1,18 @@
 package com.ran.db;
 
+import java.util.List;
+
 public class PageBean {
 
-	public int currentPage;  //当前页
+	private int currentPage;  //当前页
 	
-	public int totalPage;   //总页数
+	private int totalPage;   //总页数
 	
-	public int pageRecord;  //每页记录数
+	private int pageRecord;  //每页记录数
 	
-	public int allRecord;  //总记录数
+	private int allRecord;  //总记录数
+	
+	private List resultList = null;  //结果集
 	
 	public PageBean(){} 
 	
@@ -19,6 +23,14 @@ public class PageBean {
 		}
 	}
 	
+	public List getResultList() {
+		return resultList;
+	}
+
+	public void setResultList(List resultList) {
+		this.resultList = resultList;
+	}
+
 	public int getCurrentPage() {
 		return currentPage;
 	}
