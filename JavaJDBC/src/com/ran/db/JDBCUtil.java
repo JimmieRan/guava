@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,9 +33,7 @@ public class JDBCUtil {
 	public  ResultSet rs = null;
 	private List entityList = null;
 	
-	public JDBCUtil(){
-		this.getConnection();   //初始化连接
-	}
+	public JDBCUtil(){}
 	
 	//通过静态代码块读取属性文件和注册数据库驱动，保证只执行一次
 	static{
@@ -61,14 +58,14 @@ public class JDBCUtil {
 	/**
 	 * 获取一个连接对象
 	 */
-	public void getConnection(){
+	public Connection getConnection(){
 		try {
-			// conn = DriverManager.getConnection(DRIVER,DBUNAME,DBPWD);   //JDBC-ODBC连接
-			 conn = DBManager.getInstance().getConnection();  //C3P0
+			 conn = DBManager.getInstance().getConnection();  //C3P0连接池控制Connection
 		} catch (Exception e) {
 			System.out.println("数据库连接失败！");
 			e.printStackTrace();
 		}
+		return conn;
 	}
 	
 	/**
@@ -80,6 +77,7 @@ public class JDBCUtil {
 	 * @return —— 返回一个LIST容器装PO对象，前台可直接遍历操作对象
 	 */
 	public List query( String sql , List parms,Class classPo ){
+		conn = this.getConnection();
 		entityList = new ArrayList();
 		//Map结构：key:表字段名   value：表字段值
 		//LIST结果：获取每一行数据，
@@ -125,6 +123,7 @@ public class JDBCUtil {
 	 * @return
 	 */
 	public int countQuery( String sql,List parms){
+		conn = this.getConnection();
 		int count = 0;
 		try {
 			ps = conn.prepareStatement(sql);  //预编译SQL
@@ -151,12 +150,13 @@ public class JDBCUtil {
 	 * @return
 	 */
 	public int edit( String sql, List pares ){
+		conn = this.getConnection();
 		int hasEffect = 0;
 		try {
 			ps = conn.prepareStatement(sql);  //预编译SQL
-			
 			if( 0 != pares.size() ){
 				for( int i = 0; i<pares.size(); i++ ){
+					System.out.println(pares.get(i).getClass().getName());
 					ps.setObject(i+1, pares.get(i));   //循环设置参数
 				}
 			}

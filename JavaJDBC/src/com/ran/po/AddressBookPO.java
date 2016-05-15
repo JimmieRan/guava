@@ -1,5 +1,7 @@
 package com.ran.po;
 
+import java.sql.Timestamp;
+
 public class AddressBookPO {
 	
 	public String yname;
@@ -9,6 +11,8 @@ public class AddressBookPO {
 	public String phone;
 	
 	public String address;
+	
+	public Timestamp createtime;
 
 	public String getYname() {
 		return yname;
@@ -40,6 +44,14 @@ public class AddressBookPO {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public Timestamp getCreatetime() {
+		return createtime;
+	}
+
+	public void setCreatetime(Timestamp createtime) {
+		this.createtime = createtime;
 	}
 
 }
