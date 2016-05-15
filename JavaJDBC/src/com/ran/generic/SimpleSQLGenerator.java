@@ -199,7 +199,7 @@ public class SimpleSQLGenerator {
 		return sql;
 	}
 	
-	//Oracle分页SQL
+	//Oracle分页SQL:基本满足大部分功能性分页，如有性能瑕疵欢迎帮忙改进
 	public String pageSQLForOracle( int pageRecord , int currentPage ){
 		//排序分页：select * from ( select rownum rn, t.* from ( select * from ADDDRESSBOOK order by SEX ) t where rownum <= 5) where rn > 0
 		//无排序分页：select * from ( select rownum rn, t.* from ADDDRESSBOOK t where rownum <= 5) where rn > 0
@@ -214,6 +214,20 @@ public class SimpleSQLGenerator {
 		}
 		return sql;
 	}
+	
+	//MySQL分页SQL:基本满足大部分功能性分页，如有性能瑕疵欢迎帮忙改进
+	public String pageSQLForMySQL( int pageRecord , int currentPage ){
+		//排序分页：select * from ADDRESSBOOK order by createtime limit 0,5
+		//无排序分页：select * from ADDRESSBOOK order limit 0,5
+		sql = "select * from "+tableName+" t ";
+		this.spiltWHERE();
+		if( this.isOrder ){
+			sql += " ORDER BY "+orderField+" "+sort;
+		}
+		sql += " limit "+(currentPage-1)*pageRecord + ","+pageRecord;
+		return sql;
+	}
+	
 	
 	
 	public static void main(String[] args) {
@@ -234,7 +248,9 @@ public class SimpleSQLGenerator {
 		System.out.println(sQLGenerator.editSQL(1));
 		System.out.println(sQLGenerator.editSQL(2));
 		System.out.println(sQLGenerator.querySQL());
-		System.out.println(sQLGenerator.pageSQLForOracle(5, 1));
+		//System.out.println(sQLGenerator.pageSQLForOracle(5, 1));
+		System.out.println(sQLGenerator.pageSQLForMySQL(5, 1));
+		
 	}
 }
 

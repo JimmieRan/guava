@@ -1,7 +1,10 @@
 package com.ran.db;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import com.ran.generic.SimpleSQLGenerator;
 
@@ -50,7 +53,11 @@ public class PageDBManager {
 		if( null != sqlGen.getFields() ){
 			fieldsValue = new ArrayList( sqlGen.getFields().values() );
 		}
-		recordList = jdbc.query(sqlGen.pageSQLForOracle(pageBean.getPageRecord(), pageBean.getCurrentPage()), fieldsValue, classPo);
+		if( "mysql".equals(DBManager.DBSOURCE) ){
+			recordList = jdbc.query(sqlGen.pageSQLForMySQL(pageBean.getPageRecord(), pageBean.getCurrentPage()), fieldsValue, classPo);
+		}else if( "oracle".equals(DBManager.DBSOURCE) ){
+			recordList = jdbc.query(sqlGen.pageSQLForOracle(pageBean.getPageRecord(), pageBean.getCurrentPage()), fieldsValue, classPo);
+		}
 		return recordList;
 	}
 	

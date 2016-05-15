@@ -1,7 +1,5 @@
 package com.ran.db;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,49 +9,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
-
 import com.ran.generic.ResultSetToObject;
 
 
 public class JDBCUtil {
 	
-	private static String CLASSNAME;  //驱动类
-	
-	private static String DRIVER;  //驱动，填写数据库IP、端口和数据库名
-	
-	private static String DBUNAME;  //数据库用户名
-	
-	private static String DBPWD;  //数据库密码
-	
-	private static final Properties pro = new Properties();     //属性文件对象
-	private static final String FILEDIR = "src/conn.properties";   //指定属性文件地址
  	public Connection conn = null;
 	public  PreparedStatement ps = null;
 	public  ResultSet rs = null;
 	private List entityList = null;
 	
 	public JDBCUtil(){}
-	
-	//通过静态代码块读取属性文件和注册数据库驱动，保证只执行一次
-	static{
-		try {
-			FileInputStream connFileStream =new FileInputStream(new File(FILEDIR));
-			pro.load(connFileStream);   //读取属性文件
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		//获取对应值
-		CLASSNAME = pro.getProperty("CLASSNAME");
-		DRIVER = pro.getProperty("DRIVER");
-		DBUNAME = pro.getProperty("DBUNAME");
-		DBPWD = pro.getProperty("DBUPWD");
-		try {
-			Class.forName(CLASSNAME);   //加载驱动
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
 	
 	/**
 	 * 获取一个连接对象
