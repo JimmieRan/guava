@@ -30,7 +30,7 @@ public class MyDAO {
 		fields.put("ADDRESS", "成都市");
 		sqlGen.setFields(fields);                                  //设置查询条件，如居住地ADDRESS是“成都市”的所有记录
 		sqlGen.setOrder(true);                                     //设置排序
-		sqlGen.setOrderField("CREATETIME");                        //按创建时间排序
+		sqlGen.setOrderField("CREATETIME");                        //按创建时间排序x
 		sqlGen.setSort(SimpleSQLGenerator.DESC);                   //降序
 		
 		/**********开始查询分页************/
