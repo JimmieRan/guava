@@ -1,4 +1,4 @@
-package com.ran.po;
+package com.ran.db;
 
 import java.util.List;
 

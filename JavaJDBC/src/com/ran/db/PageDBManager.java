@@ -3,7 +3,6 @@ package com.ran.db;
 import java.util.ArrayList;
 import java.util.List;
 import com.ran.generic.SimpleSQLGenerator;
-import com.ran.po.PageBean;
 
 /**
  * 分页管理类
