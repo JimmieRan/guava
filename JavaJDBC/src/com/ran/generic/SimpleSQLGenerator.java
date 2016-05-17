@@ -227,30 +227,5 @@ public class SimpleSQLGenerator {
 		sql += " limit "+(currentPage-1)*pageRecord + ","+pageRecord;
 		return sql;
 	}
-	
-	
-	
-	public static void main(String[] args) {
-		Map<String,Object> fields = new HashMap<String,Object>();
-		fields.put("SEX", "女");
-		fields.put("ADDRESS", "成都市");
-		Map<String,Object> insertFields = new HashMap<String,Object>();
-		insertFields.put("YNAME", "张莉");
-		insertFields.put("PHONE", "13242221112");
-		insertFields.put("ADDRESS", "西昌市");
-		Map<String,Object> updateFields = new HashMap<String,Object>();
-		updateFields.put("YNAME", "张莉");
-		updateFields.put("PHONE", "13242221112");
-		updateFields.put("ADDRESS", "西昌市");
-		SimpleSQLGenerator sQLGenerator = new SimpleSQLGenerator("ADDRESSBOOK",new String[]{},updateFields,insertFields,fields,true,"SEX",SimpleSQLGenerator.DESC);
-		System.out.println(sQLGenerator.countSQL());
-		System.out.println(sQLGenerator.editSQL(0));
-		System.out.println(sQLGenerator.editSQL(1));
-		System.out.println(sQLGenerator.editSQL(2));
-		System.out.println(sQLGenerator.querySQL());
-		//System.out.println(sQLGenerator.pageSQLForOracle(5, 1));
-		System.out.println(sQLGenerator.pageSQLForMySQL(5, 1));
-		
-	}
 }
 

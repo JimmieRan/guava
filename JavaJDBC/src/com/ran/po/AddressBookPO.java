@@ -2,6 +2,10 @@ package com.ran.po;
 
 import java.sql.Timestamp;
 
+/**
+ * 与数据表ADDRESS对应的实体类
+ * @author Administrator
+ */
 public class AddressBookPO {
 	
 	public String yname;

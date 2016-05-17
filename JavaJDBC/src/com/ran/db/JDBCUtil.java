@@ -138,7 +138,6 @@ public class JDBCUtil {
 		return hasEffect;
 	}
 	
-	
 	/**
 	 * 关闭所有对象
 	 * @throws Exception
@@ -154,6 +153,4 @@ public class JDBCUtil {
 			conn.close();
 		}
 	}
-	
-
 }

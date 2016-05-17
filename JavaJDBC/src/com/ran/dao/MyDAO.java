@@ -1,10 +1,7 @@
 package com.ran.dao;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import com.ran.db.JDBCUtil;
 import com.ran.db.PageBean;
 import com.ran.db.PageDBManager;
 import com.ran.generic.SimpleSQLGenerator;
@@ -52,32 +49,6 @@ public class MyDAO {
 		
 		long end = System.currentTimeMillis();
 		System.out.println("运行时间："+(end-star));
-	}
-	
-	public void insetRecord(){
-		SimpleSQLGenerator sqlGen = new SimpleSQLGenerator();
-		sqlGen.setTableName("ADDDRESSBOOK");
-		JDBCUtil jdbc = new JDBCUtil();
-		for( int i = 1; i<=50 ; i++ ){
-			Map<String,Object> insertFields = new HashMap<String,Object>();
-			insertFields.put("YNAME", "零零"+i);
-			if( i % 2 == 0 ){
-				insertFields.put("SEX", "男");
-			}else{
-				insertFields.put("SEX", "女");
-			}
-			insertFields.put("PHONE", "135411526"+i);
-			insertFields.put("ADDRESS", "成都市");
-			insertFields.put("CREATETIME",new Timestamp(System.currentTimeMillis()));
-			sqlGen.setInsertFields(insertFields);
-			List parms = new ArrayList(insertFields.values());
-			jdbc.edit(sqlGen.editSQL(0),parms );
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 	
 	public static void main(String[] args) {

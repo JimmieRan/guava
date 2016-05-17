@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
-
 /**
  * 封装实体类-将制定对象类型数据通过反射赋值初始化对象
  * @author Administrator
