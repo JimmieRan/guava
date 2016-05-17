@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.ran.db.JDBCUtil;
-import com.ran.db.PageBean;
 import com.ran.db.PageDBManager;
 import com.ran.generic.SimpleSQLGenerator;
 import com.ran.po.AddressBookPO;
+import com.ran.po.PageBean;
 
 public class MyDAO {	
 	

@@ -1,13 +1,14 @@
 package com.ran.db;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-
 import com.ran.generic.SimpleSQLGenerator;
+import com.ran.po.PageBean;
 
+/**
+ * 分页管理类
+ * @author Administrator
+ */
 public class PageDBManager {
 	
 	private static final JDBCUtil jdbc = new JDBCUtil();    //数据库JDBC操作类
@@ -53,6 +54,7 @@ public class PageDBManager {
 		if( null != sqlGen.getFields() ){
 			fieldsValue = new ArrayList( sqlGen.getFields().values() );
 		}
+		//判断数据源
 		if( "mysql".equals(DBManager.DBSOURCE) ){
 			recordList = jdbc.query(sqlGen.pageSQLForMySQL(pageBean.getPageRecord(), pageBean.getCurrentPage()), fieldsValue, classPo);
 		}else if( "oracle".equals(DBManager.DBSOURCE) ){
