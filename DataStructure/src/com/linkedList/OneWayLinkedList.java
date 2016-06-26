@@ -3,15 +3,15 @@ package com.linkedList;
 public class OneWayLinkedList {
 
 	/**
-	 * ¶¨ÒåÒ»¸öLNodeÀàÀ´´æ´¢½ÚµãµÄÊý¾ÝÖµºÍÏÂÒ»¸ö½ÚµãµÄÖ¸ÕëÒýÓÃ
+	 * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½LNodeï¿½ï¿½ï¿½ï¿½ï¿½æ´¢ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Úµï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	class LNode{
 		
-		private String data;  //´æ´¢Êý¾ÝÖµ
+		private String data;  //ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½Öµ
 		
-		private int post;    //µ±Ç°½ÚµãÎ»ÖÃË÷Òý´Ó0¿ªÊ¼
+		private int post;    //ï¿½ï¿½Ç°ï¿½Úµï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½Ê¼
 		
-		private LNode next;  //Ö¸ÏòÏÂÒ»½ÚµãµÄÒýÓÃ
+		private LNode next;  //Ö¸ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		
 		public LNode( String data ){
 			this.data = data;
@@ -37,8 +37,8 @@ public class OneWayLinkedList {
 		}
 	}
 	
-	private LNode head;   //¶¨ÒåÒ»¸ö½ÚµãÍ·
-	private int size;    //¶¨ÒåÒ»¸ö³¤¶È
+	private LNode head;   //ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Úµï¿½Í·
+	private int size;    //ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	public int getSize() {
 		return size;
@@ -48,7 +48,7 @@ public class OneWayLinkedList {
 		this.size = size;
 	}
 	
-	//³õÊ¼»¯Á´±íÍ·HEAD
+	//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·HEAD
 	public boolean initHeadNode( String value ){
 		if( head == null ){
 			 head = new LNode(value);
@@ -60,10 +60,10 @@ public class OneWayLinkedList {
 		 }
 	}
 
-	//Ìí¼Ó½Úµã-Î²²å·¨
+	//ï¿½ï¿½Ó½Úµï¿½-Î²ï¿½å·¨
 	 public void add( String value ){
-		 LNode ptr = null;    //µ±Ç°½Úµã
-		 LNode pnext = null;  //ÏÂÒ»½Úµã
+		 LNode ptr = null;    //ï¿½ï¿½Ç°ï¿½Úµï¿½
+		 LNode pnext = null;  //ï¿½ï¿½Ò»ï¿½Úµï¿½
 		 if( initHeadNode(value) ){
 			 ptr = head;
 			 pnext = ptr.next;
@@ -78,15 +78,15 @@ public class OneWayLinkedList {
 		 }
 	 }
 	 
-	//Ìí¼Ó½Úµã-Ö¸¶¨Î»ÖÃÌí¼Ó½Úµã
+	//ï¿½ï¿½Ó½Úµï¿½-Ö¸ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ó½Úµï¿½
 	 public void add( int post, String value ){
 		if( post > this.size ){
-			System.out.println("Exception¡ª¡ªIndexOutOfBoundsException£ºPOST£º"+post+", SIZE£º"+size);
+			System.out.println("Exceptionï¿½ï¿½ï¿½ï¿½IndexOutOfBoundsExceptionï¿½ï¿½POSTï¿½ï¿½"+post+", SIZEï¿½ï¿½"+size);
 		}else if( post == this.size ){
 			this.add(value);
 		}else{
-			LNode ptr = null;    //µ±Ç°½Úµã
-			LNode pnext = null;  //ÏÂÒ»½Úµã
+			LNode ptr = null;    //ï¿½ï¿½Ç°ï¿½Úµï¿½
+			LNode pnext = null;  //ï¿½ï¿½Ò»ï¿½Úµï¿½
 			LNode newNode = null;
 			if( initHeadNode(value) ){
 				 ptr = head;
@@ -97,7 +97,7 @@ public class OneWayLinkedList {
 						 head.setPost(0);
 						 head.setNext(ptr);
 						 pnext = head.next;
-						//¸üÐÂÐÂ½ÚµãºóÃæµÄ½ÚµãÎ»ÖÃË÷Òý+1
+						//ï¿½ï¿½ï¿½ï¿½ï¿½Â½Úµï¿½ï¿½ï¿½ï¿½Ä½Úµï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½+1
 						 while( pnext!=null ){
 							 ptr = pnext;
 							 pnext.setPost(ptr.getPost()+1);
@@ -106,11 +106,11 @@ public class OneWayLinkedList {
 						 size++;
 						 break;
 					 }else if( pnext.post == post ){
-						 newNode = new LNode(value);   //³õÊ¼»¯ÐÂ½Úµã
+						 newNode = new LNode(value);   //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Â½Úµï¿½
 						 newNode.setPost(pnext.post);
 						 ptr.setNext(newNode);      
-						 ptr.getNext().setNext(pnext);  //¸üÐÂºó¼Ì½Úµã¹ØÏµ
-						//¸üÐÂÐÂ½ÚµãºóÃæµÄ½ÚµãÎ»ÖÃË÷Òý+1
+						 ptr.getNext().setNext(pnext);  //ï¿½ï¿½ï¿½Âºï¿½Ì½Úµï¿½ï¿½Ïµ
+						//ï¿½ï¿½ï¿½ï¿½ï¿½Â½Úµï¿½ï¿½ï¿½ï¿½Ä½Úµï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½+1
 						 while( pnext!=null ){
 							 ptr = pnext;
 							 pnext.setPost(ptr.getPost()+1);
@@ -127,10 +127,10 @@ public class OneWayLinkedList {
 	 }
 	 
 	 
-	 //Í¨¹ýË÷Òý»ñÈ¡µ±Ç°½Úµã
+	 //Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½Úµï¿½
 	 public LNode get( int post ){
-		 LNode ptr = null;    //µ±Ç°½Úµã
-		 LNode pnext = null;  //ÏÂÒ»½Úµã
+		 LNode ptr = null;    //ï¿½ï¿½Ç°ï¿½Úµï¿½
+		 LNode pnext = null;  //ï¿½ï¿½Ò»ï¿½Úµï¿½
 		 
 		 ptr = head;
 		 pnext = ptr.next;
@@ -144,7 +144,7 @@ public class OneWayLinkedList {
 		 return null;
 	 }
 	 
-	 //É¾³ýÖ¸¶¨Ë÷ÒýÎ»ÖÃÉÏµÄ½Úµã
+	 //É¾ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ÏµÄ½Úµï¿½
 	 public void remove( int post ){
 		 
 	 }
@@ -153,10 +153,10 @@ public class OneWayLinkedList {
 		 LNode pnext = null;
 		 if( head != null ){
 			 pnext = head.next;
-			 System.out.println("date£º"+head.data+"  post£º"+head.post);
+			 System.out.println("dateï¿½ï¿½"+head.data+"  postï¿½ï¿½"+head.post);
 		 }
 		 while( pnext != null ){
-			 System.out.println("date£º"+pnext.data+"  post£º"+pnext.post);
+			 System.out.println("dateï¿½ï¿½"+pnext.data+"  postï¿½ï¿½"+pnext.post);
 			 pnext = pnext.next;
 		 }
 	 }
@@ -170,8 +170,8 @@ public class OneWayLinkedList {
 		 owll.add("a5");
 		 owll.add(3,"a6");
 		 owll.printLink();
-		 System.out.println("SIZE£º" + owll.getSize());
-		 
+		 System.out.println("SIZEï¿½aaaawedï¿½" + owll.getSize());
+
 		 LNode node = owll.get(3);
 		 if( null!=node ){
 			 System.out.println(node.getData());
